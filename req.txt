@@ -1,0 +1,6 @@
+gspread
+python-telegram-bot==12.0.0b1
+python-dateutil
+CurrencyConverter
+oauth2client
+schedule
