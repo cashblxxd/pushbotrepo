@@ -261,5 +261,9 @@ tr = {
     "Ссылка": "Link",
     "Не забудьте открыть доступ ": "Don't forget to open it to editing for ",
     " (все остальные задачи будут временно приостановлены, приобретите полную версию, чтобы иметь сразу несколько активных задач)": " (all other tasks will be temporarily paused, buy subscription to run multiple tasks in parallel)",
-    "Получить доступ": "Get full access"
+    "Получить доступ": "Get full access",
+    "Спасибо за покупку!": "Thank you for your payment!",
+    "Ваш премиум-доступ!": "Your premium access!",
+    "Оплачивать можно только из основного бота @TonyaBot": "You can only pay from the main bot @TonyaBot"
 }
+
