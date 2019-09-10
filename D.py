@@ -36,13 +36,13 @@ def get_tz():
 
 bots = {}
 admin_gspread_link = "https://docs.google.com/spreadsheets/d/1UxPtaJDXWsxtd5EpICIFIe0m_lu5wSt5FPNWPR3Gmgk/edit?usp=sharing"
-with open("client_secret.json") as f:
+with open("client_secret.json", encoding="utf-8") as f:
     s = load(f)
     GSPREAD_ACCOUNT_EMAIL = s["client_email"]
 
 
 def check_task_active(bot_id, uid, job_id):
-    with open("dumpp.json") as f:
+    with open("dumpp.json", encoding="utf-8") as f:
         user_data = load(f)
         #print(job_id in user_data[bot_id][uid] and user_data[bot_id][uid][job_id]["state"] == "running")
         return job_id in user_data[bot_id][uid] and user_data[bot_id][uid][job_id]["state"] == "running"
@@ -51,7 +51,7 @@ def check_task_active(bot_id, uid, job_id):
 def send_msg(bot_id, cid, msg, uid):
     print(bot_id, cid, msg, uid)
     print("alivv", str(datetime.now()))
-    with open("request.log") as f:
+    with open("request.log", encoding="utf-8") as f:
         s = load(f)
         s["requests_sent"].append(str(datetime.now()))
         if uid not in s["requests_sent_usr"]:
@@ -129,7 +129,7 @@ def create_message(bot, job_data, bot_id, uid, lang, from_main=False):
     print(job_data["selected_hr"])
     schedule.every().day.at(job_data["selected_hr"] + ":" + job_data["selected_min"]).do(sender, bot, job_data, bot_id, uid, lang).tag(bot_id + "::" + uid + "::" + job_data["id"])
     if from_main:
-        with open("request.log") as f:
+        with open("request.log", encoding="utf-8") as f:
             s = load(f)
             s["requests_created"].append(str(datetime.now()))
             s["requests_created_usr"][uid] = s["requests_created_usr"].get(uid, []) + [str(datetime.now())]
@@ -151,7 +151,7 @@ def create_message(bot, job_data, bot_id, uid, lang, from_main=False):
             print(worksheet.title, 2)
             worksheet.insert_row(["Дата создания запроса", "Дата начала рассылки", "Сообщение", "Частота выполнения", "Дата окончания", "Время рассылок", "Пользователь"], 1)
         uname = "hidden"
-        with open("users.json") as f:
+        with open("users.json", encoding="utf-8") as f:
             s = load(f)
             for i in s:
                 if str(s[i]) == str(uid):
@@ -168,7 +168,7 @@ def delete_task(bot_id, uid, job_id):
 def commit(update, context, type):
     bot_id = str(context.bot.id)
     user_data = {**load_db(), **context.user_data}
-    with open("payments.log") as f:
+    with open("payments.log", encoding="utf-8") as f:
         s = load(f)
         if "payments" not in s:
             s["payments"] = []
@@ -225,13 +225,13 @@ def commit(update, context, type):
             "requests_created": 0,
             "requests_sent": 0,
         }
-    with open("users.json") as f:
+    with open("users.json", encoding="utf-8") as f:
         s = load(f)
         if context.bot.get_chat(uid).username not in s:
             s[context.bot.get_chat(uid).username] = uid
             notify(context.bot, uid)
             dump(s, open("users.json", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
-    with open("muted_chats.json") as f:
+    with open("muted_chats.json", encoding="utf-8") as f:
         #print(1)
         s = load(f)
         #print(s)
@@ -239,7 +239,7 @@ def commit(update, context, type):
         if uid not in s:
             s[uid] = {}
             dump(s, open('muted_chats.json', 'w+', encoding='utf-8'), ensure_ascii=False, indent=4)
-    with open("request.log") as f:
+    with open("request.log", encoding="utf-8") as f:
         s = load(f)
         if not s:
             s = {
@@ -255,7 +255,7 @@ def commit(update, context, type):
 
 
 def check_payment_notify(bot, uid):
-    with open("dumpp.json") as f:
+    with open("dumpp.json", encoding="utf-8") as f:
         s = load(f)
         if s[admin_id][uid]["subscription_end"] == -1:
             return schedule.CancelJob
@@ -393,7 +393,7 @@ def new_chat(update, context):
             'title': update.message.chat.title
         }
         pprint(context.user_data[bot_id])
-        with open("muted_chats.json") as f:
+        with open("muted_chats.json", encoding="utf-8") as f:
             s = load(f)
             if str(update.message.chat_id) not in s[context.user_data[bot_id]["owner"]]:
                 s[context.user_data[bot_id]["owner"]][str(update.message.chat_id)] = {'title': update.message.chat.title, 'muted': 0}
@@ -435,7 +435,7 @@ def menu(update, context):
 
 def update_admin_stats(update=0, context=0, type=0, data=0):
     if type == 0:
-        with open("request.log") as f:
+        with open("request.log", encoding="utf-8") as f:
             s = load(f)
             requests_created = []
             requests_sent = []
@@ -455,7 +455,7 @@ def update_admin_stats(update=0, context=0, type=0, data=0):
         dump(s, open("request.log", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
         return context.user_data
     elif type == 1:
-        with open("request.log") as f:
+        with open("request.log", encoding="utf-8") as f:
             s = load(f)
             requests_created = []
             requests_sent = []
@@ -514,14 +514,14 @@ def check_payments():
         if i["status"] == "SUCCESS" and i["comment"]:
             comment = i["comment"].split()
             if len(comment) == 3 and comment[0].isdigit():
-                with open("payments.log") as f:
+                with open("payments.log", encoding="utf-8") as f:
                     s = load(f)
                     if "payments" not in s:
                         s["payments"] = []
                     if ' '.join(comment) not in s["payments"]:
                         s["payments"].append(' '.join(comment))
                         uid, date, time = comment
-                        with open("dumpp.json") as f:
+                        with open("dumpp.json", encoding="utf-8") as f:
                             k = load(f)
                             if uid not in k:
                                 continue
@@ -607,7 +607,7 @@ def verify_payment(uid, plan, currency, amt):
         "12months": relativedelta(months=12),
          "-1": -1,
     }
-    with open("dumpp.json") as f:
+    with open("dumpp.json", encoding="utf-8") as f:
         s = load(f)
         if s[admin_id][uid]["referrer"]:
             rfid = s[admin_id][uid]["referrer"]
@@ -642,7 +642,7 @@ def successful_payment_callback(update, context):
         "12months": relativedelta(months=12),
         "-1": -1,
     }
-    with open("dumpp.json") as f:
+    with open("dumpp.json", encoding="utf-8") as f:
         s = load(f)
         lang = s[admin_id][uid]["lang"]
         if s[admin_id][uid]["referrer"]:
@@ -701,7 +701,7 @@ def button(update, context):
         bot_idd = context.user_data[admin_id][uid]["task_bot"]
         if data.startswith("mute_toggle::"):
             cid = data.strip("mute_toggle::")
-            with open("muted_chats.json") as f:
+            with open("muted_chats.json", encoding="utf-8") as f:
                 s = load(f)
                 s[uid][cid]["muted"] = (s[uid][cid]["muted"] + 1) % 2
                 if not s[uid]:
@@ -747,7 +747,7 @@ def button(update, context):
                 keyboard = [[InlineKeyboardButton("🔙", callback_data="back::to_admin"),
                             InlineKeyboardButton("🏡", callback_data="::home::")],
                             [InlineKeyboardButton("Все", callback_data="send_message::all")]]
-                with open("users.json") as f:
+                with open("users.json", encoding="utf-8") as f:
                     s = load(f)
                     for i in s:
                         if s[i] != "106052":
@@ -776,7 +776,7 @@ def button(update, context):
         elif data.startswith("promocode::"):
             if data == "promocode::list":
                 a = []
-                with open("promocodes.json") as f:
+                with open("promocodes.json", encoding="utf-8") as f:
                     s = load(f)
                     t = {
                         '1weeks': '1 неделя',
@@ -804,7 +804,7 @@ def button(update, context):
                         context.bot.send_message(uid, i, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Удалить промокод", callback_data=f"promocode::delete::{j}"), InlineKeyboardButton("🏡", callback_data="::home::")]]))
             elif data.startswith("promocode::delete::"):
                 j = data.lstrip("promocode::delete::")
-                with open("promocodes.json") as f:
+                with open("promocodes.json", encoding="utf-8") as f:
                     s = load(f)
                     s.pop(j)
                 dump(s, open("promocodes.json", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
@@ -921,7 +921,7 @@ def button(update, context):
                 keyboard = [[InlineKeyboardButton("🔙", callback_data="back::to_admin"),
                              InlineKeyboardButton("🏡", callback_data="::home::")],
                             [InlineKeyboardButton("Все", callback_data="send_message::all")]]
-                with open("users.json") as f:
+                with open("users.json", encoding="utf-8") as f:
                     s = load(f)
                     for i in s:
                         if s[i] != "106052":
@@ -1127,7 +1127,7 @@ def button(update, context):
                 update.callback_query.edit_message_text(get_menu_text(update, context, uid, admin_id, lang),
                                                         reply_markup=get_menu(lang, uid in admin_user_id))
             if data == "menu::chat_push":
-                with open("muted_chats.json") as f:
+                with open("muted_chats.json", encoding="utf-8") as f:
                     s = load(f)
                     if not s[uid]:
                         update.callback_query.edit_message_text(get_translation("Чатов пока нет. Добавляйте своих ботов в чаты, чтобы настраивать уведомления", lang),
@@ -1287,7 +1287,7 @@ def button(update, context):
             elif data == "menu::my_referrals":
                 a = []
                 ddd = {}
-                with open("users.json") as f:
+                with open("users.json", encoding="utf-8") as f:
                     s = load(f)
                     for i in s:
                         ddd[s[i]] = i
@@ -1668,7 +1668,7 @@ def texter(update, context):
                                           InlineKeyboardButton("🏡", callback_data="::home::")
                                       ]]))
     elif context.user_data[uid]["state"].startswith("promocode::"):
-        with open("promocodes.json") as f:
+        with open("promocodes.json", encoding="utf-8") as f:
             s = load(f)
             i, date = context.user_data[uid]["state"].strip("promocode::").split("::")
             text = update.message.text
@@ -1703,7 +1703,7 @@ def texter(update, context):
                                           InlineKeyboardButton("🏡", callback_data="::home::")
                                       ]]))
     elif context.user_data[uid]["state"] == "promocode":
-        with open("promocodes.json") as f:
+        with open("promocodes.json", encoding="utf-8") as f:
             s = load(f)
             text = update.message.text
             t = {
@@ -1745,7 +1745,7 @@ def texter(update, context):
                     dump(s, open("promocodes.json", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
     elif context.user_data[uid]["state"] == "ref":
         rfid = update.message.text.strip("@")
-        with open("users.json") as f:
+        with open("users.json", encoding="utf-8") as f:
             s = load(f)
             if rfid not in s:
                 update.message.reply_text(get_translation("Такого пользователя не нашлось, попробуйте ещё раз", lang), reply_markup=InlineKeyboardMarkup([[
@@ -1771,7 +1771,7 @@ def texter(update, context):
         context.user_data[bot_id][uid]["state"] = "pending"
         data = context.user_data[uid]["state"]
         if data == "send_message::all":
-            with open("users.json") as f:
+            with open("users.json", encoding="utf-8") as f:
                 s = load(f)
                 for i in s:
                     if s[i] != "106052":
@@ -1932,7 +1932,7 @@ def reply_handler(update, context):
 
 
 def send_stats_user(bot, uid):
-    with open("dumpp.json") as f:
+    with open("dumpp.json", encoding="utf-8") as f:
         print("stats")
         s = load(f)
         if s[admin_id][uid]["subscription_end"] == -1 or datetime.strptime(s[admin_id][uid]["subscription_end"], '%Y-%m-%d') >= datetime.now():
@@ -1963,7 +1963,7 @@ def send_stats_user(bot, uid):
                 InlineKeyboardButton("🏡", callback_data="::home::")
             ]]))
             return
-        with open("muted_chats.json") as f:
+        with open("muted_chats.json", encoding="utf-8") as f:
             muted = load(f)[uid]
         for i in sh.worksheets():
             if f"{get_translation('Ответы', lang)}_" in i.title and "(@" in i.title:
@@ -1995,7 +1995,7 @@ def add_bot(token, from_main=False, uid=""):
     print("here!")
     if not from_main:
         print(1)
-        with open("tokens.json", "r") as f:
+        with open("tokens.json", "r", encoding="utf-8") as f:
             try:
                 s = load(f)
             except Exception as e:
@@ -2044,7 +2044,7 @@ def add_bot(token, from_main=False, uid=""):
 
 
 def dump_admin():
-    with open("dumpp.json") as f:
+    with open("dumpp.json", encoding="utf-8") as f:
         #print("start")
         s = load(f)
         scope = ['https://spreadsheets.google.com/feeds']
@@ -2123,7 +2123,7 @@ def dump_admin():
             sh.add_worksheet(title=name, rows="1000", cols="20")
             worksheet = sh.worksheet(name)
             worksheet.insert_row(["Промокод", "Количество использований"], 1)
-        with open("promocodes.json") as f:
+        with open("promocodes.json", encoding="utf-8") as f:
             t = load(f)
             for i in t:
                 k = worksheet.findall(i)
@@ -2146,7 +2146,7 @@ def activate(update, context):
                                                         InlineKeyboardButton("🏡", callback_data="::home::")
                                                     ]]))
     else:
-        with open("users.json") as f:
+        with open("users.json", encoding="utf-8") as f:
             s = load(f)
             if username not in s:
                 update.message.reply_text("Такой пользователь ещё у нас не зарегистрирован",

@@ -65,7 +65,7 @@ scheduling
 dict_keys(['924007308'])
 here!
 received token: 924727275:AAGW0DLzd9PjiUU4eiFyvh8JzVAcdU5O3B0
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>} 924727275:AAGW0DLzd9PjiUU4eiFyvh8JzVAcdU5O3B0
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>} 924727275:AAGW0DLzd9PjiUU4eiFyvh8JzVAcdU5O3B0
 00
 set go
 {'chat_id': '-389291248',
@@ -143,7 +143,7 @@ scheduling
 dict_keys(['924007308', '924727275'])
 here!
 received token: 877449221:AAFOG0FUZccsfetweOo_QNY8dB4dSMAs0x0
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>} 877449221:AAFOG0FUZccsfetweOo_QNY8dB4dSMAs0x0
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>} 877449221:AAFOG0FUZccsfetweOo_QNY8dB4dSMAs0x0
 19
 set go
 {'chat_id': '-389291248',
@@ -160,7 +160,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221'])
 here!
 received token: 888373420:AAG1dHpj6-_yIdEbEsjgv_bKv1FLJbAj9cQ
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>} 888373420:AAG1dHpj6-_yIdEbEsjgv_bKv1FLJbAj9cQ
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>} 888373420:AAG1dHpj6-_yIdEbEsjgv_bKv1FLJbAj9cQ
 13
 set go
 {'chat_id': '-350004291',
@@ -190,7 +190,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420'])
 here!
 received token: 906256479:AAFjVAg2a9K49P9opMXesx2RvPxA9pzGy7I
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>} 906256479:AAFjVAg2a9K49P9opMXesx2RvPxA9pzGy7I
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>} 906256479:AAFjVAg2a9K49P9opMXesx2RvPxA9pzGy7I
 13
 set go
 {'chat_id': '-350004291',
@@ -232,7 +232,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479'])
 here!
 received token: 765923564:AAGwlyc8Ox9bZjbDCGnAK6Alw4_jA7vZ5As
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>} 765923564:AAGwlyc8Ox9bZjbDCGnAK6Alw4_jA7vZ5As
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>} 765923564:AAGwlyc8Ox9bZjbDCGnAK6Alw4_jA7vZ5As
 17
 set go
 {'chat_id': '-368417082',
@@ -249,7 +249,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564'])
 here!
 received token: 862615750:AAFaZB-CbMnP4u_YuGUxHEvxYs3rVY8dCh0
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>} 862615750:AAFaZB-CbMnP4u_YuGUxHEvxYs3rVY8dCh0
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>} 862615750:AAFaZB-CbMnP4u_YuGUxHEvxYs3rVY8dCh0
 21
 set go
 {'chat_id': '-1001419020405',
@@ -401,7 +401,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750'])
 here!
 received token: 416332215:AAH_tP3JecFCKS23bZ-sicVcBcffrLyRuBM
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>} 416332215:AAH_tP3JecFCKS23bZ-sicVcBcffrLyRuBM
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>} 416332215:AAH_tP3JecFCKS23bZ-sicVcBcffrLyRuBM
 14
 set go
 {'chat_id': '-334850572',
@@ -419,12 +419,12 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215'])
 here!
 received token: 913428277:AAHyvniRFOMd1LTj4Mx6CM6biLBKy11UTls
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>} 913428277:AAHyvniRFOMd1LTj4Mx6CM6biLBKy11UTls
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>} 913428277:AAHyvniRFOMd1LTj4Mx6CM6biLBKy11UTls
 scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277'])
 here!
 received token: 712777414:AAEziVUD-YMjp4fjpfoOhEqgqW92xKtywXs
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>} 712777414:AAEziVUD-YMjp4fjpfoOhEqgqW92xKtywXs
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>} 712777414:AAEziVUD-YMjp4fjpfoOhEqgqW92xKtywXs
 13
 set go
 {'chat_id': '-292035496',
@@ -491,7 +491,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414'])
 here!
 received token: 969092293:AAHQXBvxNglGILHbgTl5zSHznoX-62X0wV8
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>} 969092293:AAHQXBvxNglGILHbgTl5zSHznoX-62X0wV8
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>, '712777414': <telegram.bot.Bot object at 0x7f10e41aff60>} 969092293:AAHQXBvxNglGILHbgTl5zSHznoX-62X0wV8
 16
 set go
 {'chat_id': '-360108239',
@@ -509,7 +509,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293'])
 here!
 received token: 687692025:AAGBXGc_AmnQbZTQ4yILJVwZFZPXm4gjmJs
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>} 687692025:AAGBXGc_AmnQbZTQ4yILJVwZFZPXm4gjmJs
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>, '712777414': <telegram.bot.Bot object at 0x7f10e41aff60>, '969092293': <telegram.bot.Bot object at 0x7f10e4143eb8>} 687692025:AAGBXGc_AmnQbZTQ4yILJVwZFZPXm4gjmJs
 11
 set go
 {'chat_id': '-368001757',
@@ -573,7 +573,7 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025'])
 here!
 received token: 963028398:AAGbK5DWsGe9ta1cW6HjIiHxlvQn-BjI-Oo
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>} 963028398:AAGbK5DWsGe9ta1cW6HjIiHxlvQn-BjI-Oo
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>, '712777414': <telegram.bot.Bot object at 0x7f10e41aff60>, '969092293': <telegram.bot.Bot object at 0x7f10e4143eb8>, '687692025': <telegram.bot.Bot object at 0x7f10e4141eb8>} 963028398:AAGbK5DWsGe9ta1cW6HjIiHxlvQn-BjI-Oo
 21
 set go
 {'chat_id': '-306300756',
@@ -602,61 +602,21 @@ scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398'])
 here!
 received token: 383043558:AAEae_xzN493t4jeouO3Ty9tRuNuiJx3rew
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>} 383043558:AAEae_xzN493t4jeouO3Ty9tRuNuiJx3rew
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>, '712777414': <telegram.bot.Bot object at 0x7f10e41aff60>, '969092293': <telegram.bot.Bot object at 0x7f10e4143eb8>, '687692025': <telegram.bot.Bot object at 0x7f10e4141eb8>, '963028398': <telegram.bot.Bot object at 0x7f10e416ceb8>} 383043558:AAEae_xzN493t4jeouO3Ty9tRuNuiJx3rew
 scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558'])
 here!
 received token: 892530087:AAHYbqruU1Cp8hpnHM3p4zVyBtFoty0EkyY
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>, '383043558': <telegram.bot.Bot object at 0x7f1d40373da0>} 892530087:AAHYbqruU1Cp8hpnHM3p4zVyBtFoty0EkyY
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>, '712777414': <telegram.bot.Bot object at 0x7f10e41aff60>, '969092293': <telegram.bot.Bot object at 0x7f10e4143eb8>, '687692025': <telegram.bot.Bot object at 0x7f10e4141eb8>, '963028398': <telegram.bot.Bot object at 0x7f10e416ceb8>, '383043558': <telegram.bot.Bot object at 0x7f10e40fbef0>} 892530087:AAHYbqruU1Cp8hpnHM3p4zVyBtFoty0EkyY
 scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087'])
 here!
 received token: 947784987:AAGfL0aSqT9vn4wqYbU03A7xPBp15GZOkRo
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>, '383043558': <telegram.bot.Bot object at 0x7f1d40373da0>, '892530087': <telegram.bot.Bot object at 0x7f1d403775c0>} 947784987:AAGfL0aSqT9vn4wqYbU03A7xPBp15GZOkRo
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>, '712777414': <telegram.bot.Bot object at 0x7f10e41aff60>, '969092293': <telegram.bot.Bot object at 0x7f10e4143eb8>, '687692025': <telegram.bot.Bot object at 0x7f10e4141eb8>, '963028398': <telegram.bot.Bot object at 0x7f10e416ceb8>, '383043558': <telegram.bot.Bot object at 0x7f10e40fbef0>, '892530087': <telegram.bot.Bot object at 0x7f10e4190390>} 947784987:AAGfL0aSqT9vn4wqYbU03A7xPBp15GZOkRo
 scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087', '947784987'])
 here!
 received token: 959101265:AAHSvzBgePYt1ZxlwGjacXBr-bgmpBoPSVg
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>, '383043558': <telegram.bot.Bot object at 0x7f1d40373da0>, '892530087': <telegram.bot.Bot object at 0x7f1d403775c0>, '947784987': <telegram.bot.Bot object at 0x7f1d40389908>} 959101265:AAHSvzBgePYt1ZxlwGjacXBr-bgmpBoPSVg
+{'924007308': <telegram.bot.Bot object at 0x7f10e727e5c0>, '924727275': <telegram.bot.Bot object at 0x7f10e41fdf98>, '877449221': <telegram.bot.Bot object at 0x7f10e4211eb8>, '888373420': <telegram.bot.Bot object at 0x7f10e4203eb8>, '906256479': <telegram.bot.Bot object at 0x7f10e41d6f28>, '765923564': <telegram.bot.Bot object at 0x7f10e41bdeb8>, '862615750': <telegram.bot.Bot object at 0x7f10e41caeb8>, '416332215': <telegram.bot.Bot object at 0x7f10e4184eb8>, '913428277': <telegram.bot.Bot object at 0x7f10e4195eb8>, '712777414': <telegram.bot.Bot object at 0x7f10e41aff60>, '969092293': <telegram.bot.Bot object at 0x7f10e4143eb8>, '687692025': <telegram.bot.Bot object at 0x7f10e4141eb8>, '963028398': <telegram.bot.Bot object at 0x7f10e416ceb8>, '383043558': <telegram.bot.Bot object at 0x7f10e40fbef0>, '892530087': <telegram.bot.Bot object at 0x7f10e4190390>, '947784987': <telegram.bot.Bot object at 0x7f10e416ee48>} 959101265:AAHSvzBgePYt1ZxlwGjacXBr-bgmpBoPSVg
 scheduling
 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087', '947784987', '959101265'])
-here!
-received token: 866382576:AAFm6_vHFuhYEwdrgHWa4r2G1HS5e215L44
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>, '383043558': <telegram.bot.Bot object at 0x7f1d40373da0>, '892530087': <telegram.bot.Bot object at 0x7f1d403775c0>, '947784987': <telegram.bot.Bot object at 0x7f1d40389908>, '959101265': <telegram.bot.Bot object at 0x7f1d403b0cc0>} 866382576:AAFm6_vHFuhYEwdrgHWa4r2G1HS5e215L44
-scheduling
-dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087', '947784987', '959101265', '866382576'])
-here!
-received token: 735843391:AAGysIPXMYKxgErFtmSCe4iIlvSblBXsOms
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>, '383043558': <telegram.bot.Bot object at 0x7f1d40373da0>, '892530087': <telegram.bot.Bot object at 0x7f1d403775c0>, '947784987': <telegram.bot.Bot object at 0x7f1d40389908>, '959101265': <telegram.bot.Bot object at 0x7f1d403b0cc0>, '866382576': <telegram.bot.Bot object at 0x7f1d403a2390>} 735843391:AAGysIPXMYKxgErFtmSCe4iIlvSblBXsOms
-scheduling
-dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087', '947784987', '959101265', '866382576', '735843391'])
-here!
-received token: 933291977:AAFiHLgk32YxagWhC88S3-1pu8BEJlxzgkk
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>, '383043558': <telegram.bot.Bot object at 0x7f1d40373da0>, '892530087': <telegram.bot.Bot object at 0x7f1d403775c0>, '947784987': <telegram.bot.Bot object at 0x7f1d40389908>, '959101265': <telegram.bot.Bot object at 0x7f1d403b0cc0>, '866382576': <telegram.bot.Bot object at 0x7f1d403a2390>, '735843391': <telegram.bot.Bot object at 0x7f1d40333390>} 933291977:AAFiHLgk32YxagWhC88S3-1pu8BEJlxzgkk
-23
-set go
-{'chat_id': '-393262721',
- 'date': '2019-09-09',
- 'desc': 'Привет. \n'
-         '1. Какая польза сегодня стала результатом дня?\n'
-         '2.В чем ее можно оценить? \n'
-         '3.Чему ты научилась? \n'
-         '4.Что тебя порадовало?\n'
-         '5.Чем ты порадовала меня?',
- 'end_date': '2020-04-30',
- 'frequency': 'each_days',
- 'id': '0',
- 'selected_hr': '23',
- 'selected_min': '00',
- 'state': 'running'}
-23
-scheduling
-dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087', '947784987', '959101265', '866382576', '735843391', '933291977'])
-here!
-received token: 833550115:AAEARAZ3u9Zr4zNRQEnB1j1cPrv6D1txJRA
-{'924007308': <telegram.bot.Bot object at 0x7f1d434eeb00>, '924727275': <telegram.bot.Bot object at 0x7f1d40478eb8>, '877449221': <telegram.bot.Bot object at 0x7f1d40480eb8>, '888373420': <telegram.bot.Bot object at 0x7f1d40470eb8>, '906256479': <telegram.bot.Bot object at 0x7f1d4043deb8>, '765923564': <telegram.bot.Bot object at 0x7f1d4045fef0>, '862615750': <telegram.bot.Bot object at 0x7f1d4042eeb8>, '416332215': <telegram.bot.Bot object at 0x7f1d40441eb8>, '913428277': <telegram.bot.Bot object at 0x7f1d40409eb8>, '712777414': <telegram.bot.Bot object at 0x7f1d40467550>, '969092293': <telegram.bot.Bot object at 0x7f1d403aeeb8>, '687692025': <telegram.bot.Bot object at 0x7f1d403afeb8>, '963028398': <telegram.bot.Bot object at 0x7f1d403d2ef0>, '383043558': <telegram.bot.Bot object at 0x7f1d40373da0>, '892530087': <telegram.bot.Bot object at 0x7f1d403775c0>, '947784987': <telegram.bot.Bot object at 0x7f1d40389908>, '959101265': <telegram.bot.Bot object at 0x7f1d403b0cc0>, '866382576': <telegram.bot.Bot object at 0x7f1d403a2390>, '735843391': <telegram.bot.Bot object at 0x7f1d40333390>, '933291977': <telegram.bot.Bot object at 0x7f1d403415f8>} 833550115:AAEARAZ3u9Zr4zNRQEnB1j1cPrv6D1txJRA
-scheduling
-dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087', '947784987', '959101265', '866382576', '735843391', '933291977', '833550115'])
-123432 658196407
-1 dict_keys(['924007308', '924727275', '877449221', '888373420', '906256479', '765923564', '862615750', '416332215', '913428277', '712777414', '969092293', '687692025', '963028398', '383043558', '892530087', '947784987', '959101265', '866382576', '735843391', '933291977', '833550115', '658196407'])
-loaded messages
