@@ -1,7 +1,17 @@
 {
-    "Test": {
-        "duration": "1weeks",
+    "Halyava1mes": {
+        "duration": "1months",
         "activated": 1,
-        "expiration_date": "2019-08-31"
+        "expiration_date": "2019-09-18"
+    },
+    "Halyavasept": {
+        "duration": "1months",
+        "activated": 1,
+        "expiration_date": "2019-09-20"
+    },
+    "redmilliarder": {
+        "duration": "2weeks",
+        "activated": 7,
+        "expiration_date": "2019-09-20"
     }
 }

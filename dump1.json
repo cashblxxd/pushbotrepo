@@ -1,11 +1,11 @@
 {
     "stats": {
         "admin": {
-            "users_count": 47,
+            "users_count": 45,
             "checkout_count": 3,
-            "promocode_usage_count": 11,
-            "tasks_created_day": 12,
-            "tasks_sent_day": 26
+            "promocode_usage_count": 10,
+            "tasks_created_day": 13,
+            "tasks_sent_day": 25
         },
         "640028321": {
             "requests_created": 0,
@@ -218,14 +218,6 @@
         "191004477": {
             "requests_created": 0,
             "requests_sent": 0
-        },
-        "262430063": {
-            "requests_created": 0,
-            "requests_sent": 0
-        },
-        "256594650": {
-            "requests_created": 0,
-            "requests_sent": 0
         }
     },
     "658196407": {
@@ -233,9 +225,6 @@
         "chat_list": {
             "-380833545": {
                 "title": "Bot test"
-            },
-            "-150871127": {
-                "title": "Игромамище"
             }
         },
         "640028321": {
@@ -699,24 +688,6 @@
             "referrer": "",
             "referrals": {},
             "task_bot": "658196407"
-        },
-        "262430063": {
-            "id": 0,
-            "state": "token",
-            "subscription_end": "2019-09-23",
-            "lang": "ru",
-            "referrer": "",
-            "referrals": {},
-            "task_bot": "833550115"
-        },
-        "256594650": {
-            "id": 0,
-            "state": "pending",
-            "subscription_end": "2019-09-09",
-            "lang": "ru",
-            "referrer": "",
-            "referrals": {},
-            "task_bot": "658196407"
         }
     },
     "640028321": {
@@ -748,7 +719,7 @@
             }
         },
         "640028321": {
-            "id": 42,
+            "id": 41,
             "state": "pending",
             "subscription_end": "2019-08-24",
             "lang": "ru",
@@ -797,17 +768,6 @@
                 "frequency": "each_days",
                 "selected_hr": "10",
                 "selected_min": "38",
-                "end_date": "2019-09-30"
-            },
-            "41": {
-                "chat_id": "-350004291",
-                "state": "running",
-                "id": "41",
-                "desc": "Тест",
-                "date": "2019-09-01",
-                "frequency": "each_days",
-                "selected_hr": "00",
-                "selected_min": "09",
                 "end_date": "2019-09-30"
             }
         },
@@ -2085,15 +2045,6 @@
                 "selected_min": "03",
                 "end_date": "2020-08-31"
             }
-        },
-        "640028321": {
-            "id": 0,
-            "state": "pending",
-            "subscription_end": "2019-09-10",
-            "lang": "ru",
-            "referrer": "",
-            "referrals": {},
-            "task_bot": "658196407"
         }
     },
     "295870119": {
@@ -2478,41 +2429,5 @@
             "USD": 0
         },
         "timezone": -8
-    },
-    "262430063": {
-        "bot_list": [
-            "833550115"
-        ],
-        "state": "pending",
-        "sheet": "",
-        "date_registered": "2019-09-09",
-        "promocodes": [
-            "redmilliarder"
-        ],
-        "checkouts_count": 0,
-        "checkouts_sum": {
-            "EUR": 0,
-            "RUB": 0,
-            "USD": 0
-        },
-        "timezone": 0
-    },
-    "833550115": {
-        "owner": "262430063",
-        "chat_list": {}
-    },
-    "256594650": {
-        "bot_list": [],
-        "state": "pending",
-        "sheet": "",
-        "date_registered": "2019-09-09",
-        "promocodes": [],
-        "checkouts_count": 0,
-        "checkouts_sum": {
-            "EUR": 0,
-            "RUB": 0,
-            "USD": 0
-        },
-        "timezone": 0
     }
 }

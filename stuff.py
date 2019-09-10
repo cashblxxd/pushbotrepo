@@ -3,28 +3,8 @@ from datetime import datetime
 
 def get_help(lang="ru"):
     if lang == "ru":
-        return """
-/start - начать диалог с ботом
-/help - справка
-/message - создать задачу
-/messages - список созданных задач
-/add_bot - добавить бота
-/buy - покупка премиум аккаунта
-/referral - указать реферера
-/my_referrals - список моих рефералов
-/lang - изменить язык
-        """
-    return """
-/start - start bot
-/help - get help
-/message - create message
-/messages - my messages list
-/add_bot - add a bot
-/buy - buy premium
-/referral - enter your referral
-/my_referrals - list my referrals
-/lang - change language
-        """
+        return "/start - начать диалог с ботом\n/menu - показать главное меню\nПо всем вопросам обращаться: Pushistbot@yandex.ru"
+    return "/start - start conversation with the bot\n/menu - get main menu\nAny questions: Pushistbot@yandex.ru"
 
 
 def get_payment_ad(lang="ru"):
@@ -56,34 +36,34 @@ def get_token_desc(lang="ru"):
 def get_menu_text(update, context, uid, admin_id, lang):
     if lang == "ru":
         if context.user_data[admin_id][uid]["subscription_end"] == -1:
-            paid = "✔️Оплаченный"
-            end_time = "Расширенные функции твоего аккаунта активны навсегда."
+            paid = "✅️Оплаченный"
+            end_time = "навсегда."
         else:
             if datetime.strptime(context.user_data[admin_id][uid]["subscription_end"], '%Y-%m-%d') >= datetime.now():
-                paid = "✔️Оплаченный"
-                end_time = f"Расширенные функции твоего аккаунта активны до {context.user_data[admin_id][uid]['subscription_end']}."
+                paid = "✅️Оплаченный"
+                end_time = f"до {context.user_data[admin_id][uid]['subscription_end']}. Доступны все функции."
             else:
-                paid = "❌️Неоплаченный"
-                end_time = ""
+                paid = "❌️Неоплаченный."
+                end_time = "Доступно 1 уведомление в день."
         return f"""Добро пожаловать в личный кабинет!
-Здесь ты найдешь информацию по своим ботам, задачам, а также по оплате и приглашенным.
-Сейчас твой статус {paid}
-{end_time}
+Здесь информация по ботам, задачам, оплате и приглашенным.
+Статус:
+{paid} {end_time}
         """
     if context.user_data[admin_id][uid]["subscription_end"] == -1:
-        paid = "✔Paid"
-        end_time = "Advanced features of your account are active forever."
+        paid = "✅Paid"
+        end_time = "forever."
     else:
         if datetime.strptime(context.user_data[admin_id][uid]["subscription_end"], '%Y-%m-%d') >= datetime.now():
-            paid = "✔Paid"
-            end_time = f"Advanced features of your account are active till {context.user_data[admin_id][uid]['subscription_end']}."
+            paid = "✅Paid"
+            end_time = f"till {context.user_data[admin_id][uid]['subscription_end']}. All features available."
         else:
-            paid = "❌Unpaid"
-            end_time = ""
+            paid = "❌Unpaid."
+            end_time = "Only 1 message a day available."
     return f"""Welcome to your profile!
-    Here you'll find useful infos about your bots and tasks, as well as about payments and referrals.
-    Now your status is {paid}
-    {end_time}
+Here is info about your bots, tasks,  payments and referrals.
+Status:
+{paid} {end_time}
             """
 
 
@@ -264,6 +244,9 @@ tr = {
     "Получить доступ": "Get full access",
     "Спасибо за покупку!": "Thank you for your payment!",
     "Ваш премиум-доступ!": "Your premium access!",
-    "Оплачивать можно только из основного бота @TonyaBot": "You can only pay from the main bot @TonyaBot"
+    "Оплачивать можно только из основного бота @pushist_bot": "You can only pay from the main bot @pushist_bot",
+    "\nБанковская карта:": "\nBank card:",
+    "Введите вашу временную зону:": "Enter your timezone:",
+    "Ваша таблица: ": "Your spreadsheet: ",
 }
 

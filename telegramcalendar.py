@@ -1,6 +1,7 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup,ReplyKeyboardRemove
 import datetime
 import calendar
+from dateutil.relativedelta import relativedelta
 
 
 def create_callback_data(action,year,month,day):
@@ -13,7 +14,7 @@ def separate_callback_data(data):
     return data.split(";")
 
 
-def create_calendar(start_or_end="start", year=None, month=None):
+def create_calendar(year=None, month=None, start_or_end="start"):
     """
     Create an inline keyboard with the provided year and month
     :param int year: Year to use in the calendar, if None the current year is used.
@@ -57,8 +58,10 @@ def create_calendar(start_or_end="start", year=None, month=None):
 def process_calendar_selection(update, context):
     ret_data = (False,None)
     query = update.callback_query
+    print(query.data)
     (action,year,month,day) = separate_callback_data(query.data)
     curr = datetime.datetime(int(year), int(month), 1)
+    start_or_end = "start" if context.user_data[str(update.callback_query.from_user.id)]["state"] == "date" else "end"
     if action == "IGNORE":
         pass
         #bot.answer_callback_query(callback_query_id= query.id)
@@ -66,13 +69,15 @@ def process_calendar_selection(update, context):
         update.callback_query.edit_message_text(text=query.message.text)
         ret_data = True,datetime.datetime(int(year),int(month),int(day))
     elif action == "PREV-MONTH":
-        pre = curr - datetime.timedelta(days=1)
-        update.callback_query.edit_message_text(text=query.message.text, reply_markup=create_calendar(int(pre.year),int(pre.month)))
+        pre = curr - relativedelta(days=1)
+        update.callback_query.edit_message_text(text=query.message.text, reply_markup=create_calendar(int(pre.year),int(pre.month),start_or_end))
     elif action == "NEXT-MONTH":
-        ne = curr + datetime.timedelta(days=31)
-        update.callback_query.edit_message_text(text=query.message.text, reply_markup=create_calendar(int(ne.year),int(ne.month)))
+        ne = curr + relativedelta(days=31)
+        update.callback_query.edit_message_text(text=query.message.text, reply_markup=create_calendar(int(ne.year),int(ne.month),start_or_end))
     else:
         pass
         #bot.answer_callback_query(callback_query_id= query.id,text="Something went wrong!")
         # UNKNOWN
     return ret_data
+
+
