@@ -1,4 +1,3 @@
-# coding=utf-8
 import re
 import requests
 import gspread
@@ -123,42 +122,97 @@ def get_link(currency, uid, price):
     return f"https://qiwi.com/payment/form/99?amountFraction=0.0&currency={currency}&extra['account']=79258550898&extra['comment']={uid + '+' + '+'.join(str(datetime.now()).split())}&amountInteger={price}"
 
 
+def add_task_to_gspread(bot, job_data, bot_id, uid, lang, from_main=False):
+    try:
+        if from_main:
+            with open("request.log", encoding="utf-8") as f:
+                s = load(f)
+                s["requests_created"].append(str(datetime.now()))
+                s["requests_created_usr"][uid] = s["requests_created_usr"].get(uid, []) + [str(datetime.now())]
+            dump(s, open("request.log", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
+            scope = ['https://spreadsheets.google.com/feeds']
+            credentials = ServiceAccountCredentials.from_json_keyfile_name(
+                'client_secret.json', scope)
+            gc = gspread.authorize(credentials)
+            sh = gc.open_by_url(admin_gspread_link)
+            name = "Запросы, созданные пользователями"
+            for i in sh.worksheets():
+                if i.title == name:
+                    worksheet = sh.worksheet(name)
+                    print(worksheet.title, 1)
+                    break
+            else:
+                sh.add_worksheet(title=name, rows="1000", cols="20")
+                worksheet = sh.worksheet(name)
+                print(worksheet.title, 2)
+                worksheet.insert_row(["Дата создания запроса", "Дата начала рассылки", "Сообщение", "Частота выполнения", "Дата окончания", "Время рассылок", "Пользователь"], 1)
+            uname = "hidden"
+            with open("users.json", encoding="utf-8") as f:
+                s = load(f)
+                for i in s:
+                    if str(s[i]) == str(uid):
+                        uname = i
+                        break
+            worksheet.insert_row([str(datetime.now()), job_data["date"], job_data["desc"], get_freq_text(job_data, "ru"), job_data["end_date"], job_data["selected_hr"] + ":" + job_data["selected_min"], uname], 2)
+            print("added to admin list")
+    except Exception as e:
+        try:
+            with open("to_send.json", "r", encoding="utf-8") as f:
+                s = load(f)
+                if "to_send" not in s: s["to_send"] = []
+                s["to_send"].append([job_data, uid])
+                dump(s, open('to_send.json', 'w+', encoding='utf-8'), ensure_ascii=False, indent=4)
+        except Exception:
+            print("fatal!!!")
+
+
 def create_message(bot, job_data, bot_id, uid, lang, from_main=False):
     print("set go")
     pprint(job_data)
     print(job_data["selected_hr"])
     schedule.every().day.at(job_data["selected_hr"] + ":" + job_data["selected_min"]).do(sender, bot, job_data, bot_id, uid, lang).tag(bot_id + "::" + uid + "::" + job_data["id"])
-    if from_main:
-        with open("request.log", encoding="utf-8") as f:
-            s = load(f)
-            s["requests_created"].append(str(datetime.now()))
-            s["requests_created_usr"][uid] = s["requests_created_usr"].get(uid, []) + [str(datetime.now())]
-        dump(s, open("request.log", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
-        scope = ['https://spreadsheets.google.com/feeds']
-        credentials = ServiceAccountCredentials.from_json_keyfile_name(
-            'client_secret.json', scope)
-        gc = gspread.authorize(credentials)
-        sh = gc.open_by_url(admin_gspread_link)
-        name = "Запросы, созданные пользователями"
-        for i in sh.worksheets():
-            if i.title == name:
-                worksheet = sh.worksheet(name)
-                print(worksheet.title, 1)
-                break
-        else:
-            sh.add_worksheet(title=name, rows="1000", cols="20")
-            worksheet = sh.worksheet(name)
-            print(worksheet.title, 2)
-            worksheet.insert_row(["Дата создания запроса", "Дата начала рассылки", "Сообщение", "Частота выполнения", "Дата окончания", "Время рассылок", "Пользователь"], 1)
-        uname = "hidden"
-        with open("users.json", encoding="utf-8") as f:
-            s = load(f)
-            for i in s:
-                if str(s[i]) == str(uid):
-                    uname = i
+
+
+def send_pending_created():
+    with open("to_send.json", "r", encoding="utf-8") as f:
+        s = load(f)
+        if "to_send" in s:
+            scope = ['https://spreadsheets.google.com/feeds']
+            credentials = ServiceAccountCredentials.from_json_keyfile_name(
+                'client_secret.json', scope)
+            gc = gspread.authorize(credentials)
+            sh = gc.open_by_url(admin_gspread_link)
+            name = "Запросы, созданные пользователями"
+            for i in sh.worksheets():
+                if i.title == name:
+                    worksheet = sh.worksheet(name)
+                    print(worksheet.title, 1)
                     break
-        worksheet.insert_row([str(datetime.now()), job_data["date"], job_data["desc"], get_freq_text(job_data, "ru"), job_data["end_date"], job_data["selected_hr"] + ":" + job_data["selected_min"], uname], 2)
-        print("added to admin list")
+            else:
+                sh.add_worksheet(title=name, rows="1000", cols="20")
+                worksheet = sh.worksheet(name)
+                print(worksheet.title, 2)
+                worksheet.insert_row(
+                    ["Дата создания запроса", "Дата начала рассылки", "Сообщение", "Частота выполнения",
+                     "Дата окончания", "Время рассылок", "Пользователь"], 1)
+            neww = []
+            for job_data, uid in s["to_send"]:
+                try:
+                    uname = "hidden"
+                    with open("users.json", encoding="utf-8") as f:
+                        p = load(f)
+                        for i in p:
+                            if str(p[i]) == str(uid):
+                                uname = i
+                                break
+                    worksheet.insert_row(
+                        [str(datetime.now()), job_data["date"], job_data["desc"], get_freq_text(job_data, "ru"),
+                         job_data["end_date"], job_data["selected_hr"] + ":" + job_data["selected_min"], uname], 2)
+                    print("added to admin list")
+                except Exception as e:
+                    neww.append([job_data, uid])
+            s["to_send"] = neww
+            dump(s, open('to_send.json', 'w+', encoding='utf-8'), ensure_ascii=False, indent=4)
 
 
 def delete_task(bot_id, uid, job_id):
@@ -316,7 +370,7 @@ def start(update, context):
     uid = str(update.message.from_user.id)
     bot_id = str(context.bot.id)
     if len(context.user_data[uid]["bot_list"]) > 0:
-        update.message.reply_text(get_translation("Вы уже зарегистрированы!:)", context.user_data[admin_id][uid]["lang"]), reply_markup=get_menu(context.user_data[admin_id][uid]["lang"], uid in admin_user_id, uid == context.user_data[bot_id]["owner"]))
+        update.message.reply_text(get_translation("Вы уже зарегистрированы!:)", context.user_data[admin_id][uid]["lang"]), reply_markup=get_menu(context.user_data[admin_id][uid]["lang"], uid in admin_user_id))
     else:
         update.message.reply_text('Hi!', reply_markup=InlineKeyboardMarkup([[
             InlineKeyboardButton("🇺🇸🇪🇺", callback_data="start::en"),
@@ -420,6 +474,7 @@ def get_menu(lang, is_admin=False, is_local=False):
         [InlineKeyboardButton(get_translation("Настройка уведомлений из чатов💬", lang), callback_data="menu::chat_push")],
         [InlineKeyboardButton(get_translation("Мои боты🤖", lang), callback_data="menu::my_bots")],
         [InlineKeyboardButton(get_translation("Оплата💸", lang), callback_data="menu::buy")],
+        [InlineKeyboardButton(get_translation("Добавить бота🖥️", lang), callback_data="menu::add_bot::from_main")],
         [InlineKeyboardButton(get_translation("Ещё", lang), callback_data="menu::more")]
     ]
     if is_admin:
@@ -945,13 +1000,13 @@ def button(update, context):
                     c = bots[i]
                     keyboard.append(
                         [InlineKeyboardButton(f"{c.first_name} (@{c.username})", callback_data=f"add_task::{i}")])
-                keyboard.append([InlineKeyboardButton(get_translation("Добавить бота", lang),
+                keyboard.append([InlineKeyboardButton(get_translation("Добавить бота🖥️", lang),
                                                       callback_data="menu::add_bot::from_task")])
                 update.callback_query.edit_message_text(get_translation("Выберите бота", lang),
                                                         reply_markup=InlineKeyboardMarkup(keyboard))
             elif data.startswith("back::add_bot"):
                 from_action = data.lstrip("back::add_bot::")
-                #print(from_action)
+                print(from_action)
                 if from_action == "from_my_bots":
                     a = [[InlineKeyboardButton("🔙", callback_data="back::my_bots"),
                           InlineKeyboardButton("🏡", callback_data="::home::")]]
@@ -960,7 +1015,7 @@ def button(update, context):
                             continue
                         data = bots[i]
                         a.append([InlineKeyboardButton(f"{data.first_name} @{data.username}", callback_data=f"menu::messages::{i}")])
-                    a.append([InlineKeyboardButton(get_translation("Добавить бота", lang),
+                    a.append([InlineKeyboardButton(get_translation("Добавить бота🖥️", lang),
                                                    callback_data="menu::add_bot::from_bots")])
                     if len(a) == 2:
                         update.callback_query.edit_message_text(get_translation("Ботов пока нет", lang),
@@ -979,10 +1034,13 @@ def button(update, context):
                         c = bots[i]
                         keyboard.append(
                             [InlineKeyboardButton(f"{c.first_name} (@{c.username})", callback_data=f"add_task::{i}")])
-                    keyboard.append([InlineKeyboardButton(get_translation("Добавить бота", lang),
+                    keyboard.append([InlineKeyboardButton(get_translation("Добавить бота🖥️", lang),
                                                           callback_data="menu::add_bot::from_task")])
                     update.callback_query.edit_message_text(get_translation("Выберите бота", lang),
                                                             reply_markup=InlineKeyboardMarkup(keyboard))
+                elif from_action == "from_mai":
+                    update.callback_query.edit_message_text(get_menu_text(update, context, uid, admin_id, lang),
+                                                            reply_markup=get_menu(lang, uid in admin_user_id))
             elif data == "back::message":
                 #print(data)
                 keyboard = [
@@ -995,7 +1053,7 @@ def button(update, context):
                     c = bots[i]
                     keyboard.append(
                         [InlineKeyboardButton(f"{c.first_name} (@{c.username})", callback_data=f"add_task::{i}")])
-                keyboard.append([InlineKeyboardButton(get_translation("Добавить бота", lang),
+                keyboard.append([InlineKeyboardButton(get_translation("Добавить бота🖥️", lang),
                                                       callback_data="menu::add_bot::from_task")])
                 update.callback_query.edit_message_text(get_translation("Выберите бота", lang),
                                                         reply_markup=InlineKeyboardMarkup(keyboard))
@@ -1007,7 +1065,7 @@ def button(update, context):
                         continue
                     data = bots[i]
                     a.append([InlineKeyboardButton(f"{data.first_name} @{data.username}", callback_data=f"menu::messages::{i}")])
-                a.append([InlineKeyboardButton(get_translation("Добавить бота", lang),
+                a.append([InlineKeyboardButton(get_translation("Добавить бота🖥️", lang),
                                                callback_data="menu::add_bot::from_bots")])
                 if len(a) == 2:
                     update.callback_query.edit_message_text(get_translation("Ботов пока нет", lang),
@@ -1332,7 +1390,7 @@ def button(update, context):
                         continue
                     data = bots[i]
                     a.append([InlineKeyboardButton(f"{data.first_name} @{data.username}", callback_data=f"menu::messages::{i}")])
-                a.append([InlineKeyboardButton(get_translation("Добавить бота", lang), callback_data="menu::add_bot::from_my_bots")])
+                a.append([InlineKeyboardButton(get_translation("Добавить бота🖥️", lang), callback_data="menu::add_bot::from_my_bots")])
                 if len(a) == 2:
                     update.callback_query.edit_message_text(get_translation("Ботов пока нет", lang), reply_markup=InlineKeyboardMarkup(a))
                 else:
@@ -1367,7 +1425,7 @@ def button(update, context):
                         continue
                     c = bots[i]
                     keyboard.append([InlineKeyboardButton(f"{c.first_name} (@{c.username})", callback_data=f"add_task::{i}")])
-                keyboard.append([InlineKeyboardButton(get_translation("Добавить бота", lang), callback_data="menu::add_bot::from_task")])
+                keyboard.append([InlineKeyboardButton(get_translation("Добавить бота🖥️", lang), callback_data="menu::add_bot::from_task")])
                 update.callback_query.edit_message_text(get_translation("Выберите бота", lang), reply_markup=InlineKeyboardMarkup(keyboard))
         elif data.startswith("add_task::"):
             bot_idt = data.strip("add_task::")
@@ -1539,6 +1597,7 @@ def button(update, context):
                         reply_markup=InlineKeyboardMarkup([[
                             InlineKeyboardButton("🏡", callback_data="::home::")
                         ]]))
+                add_task_to_gspread(bots[bot_idd], context.user_data[bot_idd][uid][str(context.user_data[bot_idd][uid]["id"])], bot_idd, uid, context.user_data[admin_id][uid]["lang"], True)
                 context.user_data[bot_idd][uid]["id"] += 1
             else:
                 context.user_data[uid]["state"] = 'frequency'
@@ -1811,6 +1870,9 @@ def texter(update, context):
             context.user_data[uid]['state'] = "pending"
             bid = text.split(":")[0]
             print(bid, bid not in context.user_data[uid]['bot_list'], context.user_data[uid]['bot_list'])
+            if len(context.user_data[uid]['bot_list']) == 0:
+                if context.user_data[admin_id][uid]["subscription_end"] != -1:
+                    context.user_data[admin_id][uid]["subscription_end"] = str(datetime.strptime(context.user_data[admin_id][uid]["subscription_end"], ('%Y-%m-%d' if len(context.user_data[admin_id][uid]["subscription_end"].split()) == 1 else "%Y-%m-%d %H:%M:%S.%f")) + relativedelta(weeks=1)).split()[0]
             if bid not in context.user_data[uid]['bot_list']:
                 context.user_data[uid]['bot_list'].append(bid)
             #pprint(context.user_data)
@@ -1860,24 +1922,27 @@ def reply_handler(update, context):
             sh = gc.open_by_url(sheet_link)
             name = f"{get_translation('Ответы', lang)}_{context.bot.first_name} (@{context.bot.username})"
             print(name)
-            for i in sh.worksheets():
-                if i.title == name:
+            try:
+                for i in sh.worksheets():
+                    if i.title == name:
+                        worksheet = sh.worksheet(name)
+                        print(worksheet.title, 1)
+                        break
+                else:
+                    sh.add_worksheet(title=name, rows="1000", cols="20")
                     worksheet = sh.worksheet(name)
-                    print(worksheet.title, 1)
-                    break
-            else:
-                sh.add_worksheet(title=name, rows="1000", cols="20")
-                worksheet = sh.worksheet(name)
-                print(worksheet.title, 2)
-                worksheet.insert_row([get_translation("Дата и время ответа", lang), get_translation("Ответ", lang), get_translation("Дата и время запроса", lang), get_translation("Запрос", lang), get_translation("Пользователь", lang), get_translation("Чат", lang)], 1)
-            print(1, answer_text)
-            answer_text = answer_text.strip("'")
-            if answer_text.isdigit():
-                answer_text = int(answer_text)
-            print(answer_text)
-            print([answer_time, answer_text, query_time, query_text, answer_from, chat_name])
-            worksheet.insert_row([answer_time, answer_text, query_time, query_text, answer_from, chat_name], 2)
-            print("done")
+                    print(worksheet.title, 2)
+                    worksheet.insert_row([get_translation("Дата и время ответа", lang), get_translation("Ответ", lang), get_translation("Дата и время запроса", lang), get_translation("Запрос", lang), get_translation("Пользователь", lang), get_translation("Чат", lang)], 1)
+                print(1, answer_text)
+                answer_text = answer_text.strip("'")
+                if answer_text.isdigit():
+                    answer_text = int(answer_text)
+                print(answer_text)
+                print([answer_time, answer_text, query_time, query_text, answer_from, chat_name])
+                worksheet.insert_row([answer_time, answer_text, query_time, query_text, answer_from, chat_name], 2)
+                print("done")
+            except Exception as e:
+                print(e)
             answer_text = str(answer_text)
             name = f"{get_translation('Реакции', lang)}_{context.bot.first_name} (@{context.bot.username})"
             for i in sh.worksheets():
@@ -1891,44 +1956,47 @@ def reply_handler(update, context):
                                       get_translation("Реакция", lang), get_translation(
                         "Чтобы пометить реакцию как стандартную, напишите в графе \"Ответ пользователя\" \"другое\"")],
                                      1)
-            reactions = worksheet.get_all_values()
-            print(reactions)
-            lang = "ru"
-            if reactions and reactions[0][0] == "Bot query":
-                lang = "en"
-            otr = "другое" if lang == "ru" else "other"
-            reactions = [i for i in reactions if i[0] == query_text]
-            print(reactions)
-            if not answer_text.isdigit():
-                answered = False
-                for i in reactions:
-                    if answer_text.lower() in i[1].lower():
-                        update.message.reply_text(i[2])
-                        answered = True
-                        break
-                if not answered:
+            try:
+                reactions = worksheet.get_all_values()
+                print(reactions)
+                lang = "ru"
+                if reactions and reactions[0][0] == "Bot query":
+                    lang = "en"
+                otr = "другое" if lang == "ru" else "other"
+                reactions = [i for i in reactions if i[0] == query_text]
+                print(reactions)
+                if not answer_text.isdigit():
+                    answered = False
                     for i in reactions:
-                        if otr.lower() == i[1].lower() or answer_text.lower() in i[1].lower():
+                        if answer_text.lower() in i[1].lower():
                             update.message.reply_text(i[2])
+                            answered = True
                             break
-            else:
-                a = []
-                other = ""
-                for i in reactions:
-                    if otr.lower() in i[1].lower():
-                        other = i[2]
-                    else:
-                        a.append((i[1], i[2]))
-                a = [(0, "")] + list(sorted(a)) + [(float('inf'), "")]
-                print(a)
-                amt = int(answer_text)
-                for j in range(1, len(a) - 1):
-                    if int(a[j - 1][0]) < amt <= int(a[j][0]):
-                        update.message.reply_text(a[j][1])
-                        break
+                    if not answered:
+                        for i in reactions:
+                            if otr.lower() == i[1].lower() or answer_text.lower() in i[1].lower():
+                                update.message.reply_text(i[2])
+                                break
                 else:
-                    if other:
-                        update.message.reply_text(other)
+                    a = []
+                    other = ""
+                    for i in reactions:
+                        if otr.lower() in i[1].lower():
+                            other = i[2]
+                        else:
+                            a.append((i[1], i[2]))
+                    a = [(0, "")] + list(sorted(a)) + [(float('inf'), "")]
+                    print(a)
+                    amt = int(answer_text)
+                    for j in range(1, len(a) - 1):
+                        if int(a[j - 1][0]) < amt <= int(a[j][0]):
+                            update.message.reply_text(a[j][1])
+                            break
+                    else:
+                        if other:
+                            update.message.reply_text(other)
+            except Exception as e:
+                print(e)
 
 
 def send_stats_user(bot, uid):
@@ -1968,27 +2036,30 @@ def send_stats_user(bot, uid):
         for i in sh.worksheets():
             if f"{get_translation('Ответы', lang)}_" in i.title and "(@" in i.title:
                 #print(1)
-                keys = i.row_values(1)
-                cell_list = set(j.row for j in i.findall(re.compile(str(date.today()) + "*")))
-                for j in cell_list:
-                    vals = i.row_values(j)
-                    #print(vals)
-                    mtd = False
-                    for j in muted:
-                        if muted[j]["title"] == vals[-1]:
-                            mtd = muted[j]["muted"]
-                            break
-                    if not mtd:
-                        a = '\n'.join([f"{keys[i]}: {vals[i]}" for i in range(min(len(keys), len(vals)))])
-                        try:
-                            bot.send_message(uid, a, reply_markup=InlineKeyboardMarkup([[
-                                InlineKeyboardButton("🏡", callback_data="::home::")
-                            ]]))
-                        except Exception as e:
-                            bots[admin_id].send_message(uid, get_translation("Пожалуйста, напишите клиентскому боту ", lang) + f"@{bot.username}" + get_translation(" без этого он не сможет отправить Вам статистику"), reply_markup=InlineKeyboardMarkup([[
-                                InlineKeyboardButton("🏡", callback_data="::home::")
-                            ]]))
-                            return
+                try:
+                    keys = i.row_values(1)
+                    cell_list = set(j.row for j in i.findall(re.compile(str(date.today()) + "*")))
+                    for j in cell_list:
+                        vals = i.row_values(j)
+                        #print(vals)
+                        mtd = False
+                        for j in muted:
+                            if muted[j]["title"] == vals[-1]:
+                                mtd = muted[j]["muted"]
+                                break
+                        if not mtd:
+                            a = '\n'.join([f"{keys[i]}: {vals[i]}" for i in range(min(len(keys), len(vals)))])
+                            try:
+                                bot.send_message(uid, a, reply_markup=InlineKeyboardMarkup([[
+                                    InlineKeyboardButton("🏡", callback_data="::home::")
+                                ]]))
+                            except Exception as e:
+                                bots[admin_id].send_message(uid, get_translation("Пожалуйста, напишите клиентскому боту ", lang) + f"@{bot.username}" + get_translation(" без этого он не сможет отправить Вам статистику"), reply_markup=InlineKeyboardMarkup([[
+                                    InlineKeyboardButton("🏡", callback_data="::home::")
+                                ]]))
+                                return
+                except Exception as e:
+                    print(e)
 
 
 def add_bot(token, from_main=False, uid=""):
@@ -2060,82 +2131,91 @@ def dump_admin():
             sh.add_worksheet(title=name, rows="1000", cols="20")
         worksheet = sh.worksheet(name)
         s = update_admin_stats(type=1, data=s) # ["stats"]["admin"]
-        cell_list = worksheet.range('A1:F1')
-        for i, val in enumerate(
-                ["Время", "Кол-во пользователей", "Кол-во оплат", "Кол-во использования промокодов:", "Кол-во запросов созданных за сутки:", "Кол-во запросов отправленных за сутки:"]):
-            cell_list[i].value = val
-        worksheet.update_cells(cell_list)
-        worksheet.insert_row([str(datetime.now()), s["stats"]["admin"]["users_count"], s["stats"]["admin"]["checkout_count"], s["stats"]["admin"]["promocode_usage_count"], s["stats"]["admin"]["tasks_created_day"], s["stats"]["admin"]["tasks_sent_day"]], 2)
-        name = "Статистика пользователей"
-        for i in sh.worksheets():
-            if i.title == name:
+        try:
+            cell_list = worksheet.range('A1:F1')
+            for i, val in enumerate(
+                    ["Время", "Кол-во пользователей", "Кол-во оплат", "Кол-во использования промокодов:", "Кол-во запросов созданных за сутки:", "Кол-во запросов отправленных за сутки:"]):
+                cell_list[i].value = val
+            worksheet.update_cells(cell_list)
+            worksheet.insert_row([str(datetime.now()), s["stats"]["admin"]["users_count"], s["stats"]["admin"]["checkout_count"], s["stats"]["admin"]["promocode_usage_count"], s["stats"]["admin"]["tasks_created_day"], s["stats"]["admin"]["tasks_sent_day"]], 2)
+            name = "Статистика пользователей"
+            for i in sh.worksheets():
+                if i.title == name:
+                    worksheet = sh.worksheet(name)
+                    break
+            else:
+                sh.add_worksheet(title=name, rows="1000", cols="20")
                 worksheet = sh.worksheet(name)
-                break
-        else:
-            sh.add_worksheet(title=name, rows="1000", cols="20")
-            worksheet = sh.worksheet(name)
-            worksheet.insert_row(["id", "@username", "Дата регистрации", "Боты", "Количество запросов за последний месяц",
-             "Количество софрмированных запросов", "Тариф", "Количество оплат RUB", "Количество оплат EUR", "Количество оплат USD", "Сумма оплат", "Промокоды",
-             "Рефералы", "Когда закончится полный период"], 1)
+                worksheet.insert_row(["id", "@username", "Дата регистрации", "Боты", "Количество запросов за последний месяц",
+                 "Количество софрмированных запросов", "Тариф", "Количество оплат RUB", "Количество оплат EUR", "Количество оплат USD", "Сумма оплат", "Промокоды",
+                 "Рефералы", "Когда закончится полный период"], 1)
+        except Exception as e:
+            print(e)
         for uid in s[admin_id]:
             if uid.isdigit():
                 #print(uid)
-                bot_list = ', '.join(["@" + bots[i].username for i in s[uid]["bot_list"] if i != admin_id])
-                plan = "Платный" if (s[admin_id][uid]["subscription_end"] == -1 or datetime.strptime(s[admin_id][uid]["subscription_end"], '%Y-%m-%d') >= datetime.now()) else "Бесплатный"
-                payments = [s[uid]['checkouts_sum']['EUR'], s[uid]['checkouts_sum']['RUB'], s[uid]['checkouts_sum']['USD']]
-                promocodes = ", ".join(s[uid]['promocodes'])
-                referrals = []
-                for i in s[admin_id][uid]["referrals"]:
-                    try:
-                        referrals.append(bots[admin_id].get_chat(i).username if bots[admin_id].get_chat(i).username else "hidden")
-                    except Exception:
-                        referrals.append("hidden")
-                referrals = ", ".join(referrals)
-                end_date = s[admin_id][uid]["subscription_end"] if s[admin_id][uid]["subscription_end"] != -1 else "Никогда (доступ на всю жизнь)"
-                k = worksheet.findall(uid)
-                if k:
-                    k = k[0].row
-                    #print(k)
-                    cell_list = worksheet.range(f'A{k}:N{k}')
-                    try:
-                        name = bots[admin_id].get_chat(uid).username
-                    except Exception:
-                        name = "hidden"
-                    for i, val in enumerate([uid, name,
-                                  s[uid]["date_registered"], bot_list, s["stats"][uid]["requests_created"], s["stats"][uid]["requests_sent"],
-                                  plan, s[uid]['checkouts_count'], *payments, promocodes, referrals, end_date]):
-                        cell_list[i].value = val
-                    worksheet.update_cells(cell_list)
-                else:
-                    try:
-                        name = bots[admin_id].get_chat(uid).username
-                    except Exception:
-                        name = "hidden"
-                    worksheet.insert_row([uid, name,
-                                  s[uid]["date_registered"], bot_list, s["stats"][uid]["requests_created"], s["stats"][uid]["requests_sent"],
-                                  plan, s[uid]['checkouts_count'], *payments, promocodes, referrals, end_date], 2)
-        name = "Промокоды"
-        for i in sh.worksheets():
-            if i.title == name:
+                try:
+                    bot_list = ', '.join(["@" + bots[i].username for i in s[uid]["bot_list"] if i != admin_id])
+                    plan = "Платный" if (s[admin_id][uid]["subscription_end"] == -1 or datetime.strptime(s[admin_id][uid]["subscription_end"], '%Y-%m-%d') >= datetime.now()) else "Бесплатный"
+                    payments = [s[uid]['checkouts_sum']['EUR'], s[uid]['checkouts_sum']['RUB'], s[uid]['checkouts_sum']['USD']]
+                    promocodes = ", ".join(s[uid]['promocodes'])
+                    referrals = []
+                    for i in s[admin_id][uid]["referrals"]:
+                        try:
+                            referrals.append(bots[admin_id].get_chat(i).username if bots[admin_id].get_chat(i).username else "hidden")
+                        except Exception:
+                            referrals.append("hidden")
+                    referrals = ", ".join(referrals)
+                    end_date = s[admin_id][uid]["subscription_end"] if s[admin_id][uid]["subscription_end"] != -1 else "Никогда (доступ на всю жизнь)"
+                    k = worksheet.findall(uid)
+                    if k:
+                        k = k[0].row
+                        #print(k)
+                        cell_list = worksheet.range(f'A{k}:N{k}')
+                        try:
+                            name = bots[admin_id].get_chat(uid).username
+                        except Exception:
+                            name = "hidden"
+                        for i, val in enumerate([uid, name,
+                                      s[uid]["date_registered"], bot_list, s["stats"][uid]["requests_created"], s["stats"][uid]["requests_sent"],
+                                      plan, s[uid]['checkouts_count'], *payments, promocodes, referrals, end_date]):
+                            cell_list[i].value = val
+                        worksheet.update_cells(cell_list)
+                    else:
+                        try:
+                            name = bots[admin_id].get_chat(uid).username
+                        except Exception:
+                            name = "hidden"
+                        worksheet.insert_row([uid, name,
+                                      s[uid]["date_registered"], bot_list, s["stats"][uid]["requests_created"], s["stats"][uid]["requests_sent"],
+                                      plan, s[uid]['checkouts_count'], *payments, promocodes, referrals, end_date], 2)
+                except Exception as e:
+                    print(e)
+        try:
+            name = "Промокоды"
+            for i in sh.worksheets():
+                if i.title == name:
+                    worksheet = sh.worksheet(name)
+                    break
+            else:
+                sh.add_worksheet(title=name, rows="1000", cols="20")
                 worksheet = sh.worksheet(name)
-                break
-        else:
-            sh.add_worksheet(title=name, rows="1000", cols="20")
-            worksheet = sh.worksheet(name)
-            worksheet.insert_row(["Промокод", "Количество использований"], 1)
-        with open("promocodes.json", encoding="utf-8") as f:
-            t = load(f)
-            for i in t:
-                k = worksheet.findall(i)
-                if k:
-                    k = k[0].row
-                    cell_list = worksheet.range(f'A{k}:B{k}')
-                    for i, val in enumerate([i, t[i]["activated"]]):
-                        cell_list[i].value = val
-                    worksheet.update_cells(cell_list)
-                else:
-                    worksheet.insert_row([i, t[i]["activated"]], 2)
-        #print("all-in")
+                worksheet.insert_row(["Промокод", "Количество использований"], 1)
+            with open("promocodes.json", encoding="utf-8") as f:
+                t = load(f)
+                for i in t:
+                    k = worksheet.findall(i)
+                    if k:
+                        k = k[0].row
+                        cell_list = worksheet.range(f'A{k}:B{k}')
+                        for i, val in enumerate([i, t[i]["activated"]]):
+                            cell_list[i].value = val
+                        worksheet.update_cells(cell_list)
+                    else:
+                        worksheet.insert_row([i, t[i]["activated"]], 2)
+            #print("all-in")
+        except Exception as e:
+            print(e)
 
 
 def activate(update, context):
@@ -2168,7 +2248,10 @@ def main():
         #print(s)
         for i in s:
             #print(i)
-            add_bot(i, True, "")
+            try:
+                add_bot(i, True, "")
+            except Exception as e:
+                print(e)
             print(bots.keys())
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
@@ -2194,13 +2277,27 @@ def main():
             if uid.isdigit():
                 notify(bot, uid)
     print("loaded messages")
-    schedule.every().minute.do(check_payments).run()
-    schedule.every().hour.do(dump_admin).run()
+    try:
+        schedule.every().minute.do(check_payments).run()
+    except Exception as e:
+        print(e)
+    try:
+        schedule.every().hour.do(dump_admin).run()
+    except Exception as e:
+        print(e)
+    try:
+        schedule.every().minute.do(send_pending_created).run()
+    except Exception as e:
+        print(e)
+    print('whatttt')
     while True:
-        print(schedule.jobs)
-        print(datetime.now())
-        schedule.run_pending()
-        sleep(1)
+        try:
+            #print(schedule.jobs)
+            print(datetime.now())
+            schedule.run_pending()
+            sleep(1)
+        except Exception as e:
+            print(e)
 
 
 if __name__ == '__main__':

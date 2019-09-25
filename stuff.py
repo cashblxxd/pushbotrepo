@@ -28,9 +28,9 @@ def get_translation(query, lang="ru"):
 def get_token_desc(lang="ru"):
     if lang == "ru":
         return """
-        Теперь перейди в @botfather, создай бота и пришли мне API токен.
+        Теперь перейди в @botfather, создай бота и пришли мне API токен. После этого ты получишь бесплатную неделю премиум-доступа бесплатно!
         """
-    return "Send a /newbot to @botfather, follow the instructions and send me the token."
+    return "Send a /newbot to @botfather, follow the instructions and send me the token. After that you'll get a premium for a week, completely free!"
 
 
 def get_menu_text(update, context, uid, admin_id, lang):
@@ -169,7 +169,7 @@ tr = {
     "Стартовое меню": "Start menu",
     "Добавить задачу📝": "Add task📝",
     "Список моих задач": "My task list",
-    "Добавить бота": "Add bot",
+    "Добавить бота🖥️": "Add bot🖥️",
     "Указать реферера": "Enter referrer",
     "Мои рефералы📣": "My referrals📣",
     "Сменить язык🎌": "Switch language🎌",
@@ -248,5 +248,6 @@ tr = {
     "\nБанковская карта:": "\nBank card:",
     "Введите вашу временную зону:": "Enter your timezone:",
     "Ваша таблица: ": "Your spreadsheet: ",
+    "Выберите чат": "Choose chat"
 }
 
