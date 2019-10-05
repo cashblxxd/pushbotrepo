@@ -50,14 +50,20 @@ def check_task_active(bot_id, uid, job_id):
 def send_msg(bot_id, cid, msg, uid):
     print(bot_id, cid, msg, uid)
     print("alivv", str(datetime.now()))
-    with open("request.log", encoding="utf-8") as f:
-        s = load(f)
-        s["requests_sent"].append(str(datetime.now()))
-        if uid not in s["requests_sent_usr"]:
-            s["requests_sent_usr"][uid] = []
-        s["requests_sent_usr"][uid].append(str(datetime.now()))
-        dump(s, open("request.log", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
-    bots[bot_id].send_message(cid, msg)
+    try:
+        with open("request.log", encoding="utf-8") as f:
+            s = load(f)
+            s["requests_sent"].append(str(datetime.now()))
+            if uid not in s["requests_sent_usr"]:
+                s["requests_sent_usr"][uid] = []
+            s["requests_sent_usr"][uid].append(str(datetime.now()))
+            dump(s, open("request.log", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
+    except Exception as e:
+        print("wasted"]
+    try:
+        bots[bot_id].send_message(cid, msg)
+    except Exception as e:
+        print("hell no!")
 
 
 def precheckout_callback(update, context):
