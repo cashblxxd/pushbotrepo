@@ -59,7 +59,7 @@ def send_msg(bot_id, cid, msg, uid):
             s["requests_sent_usr"][uid].append(str(datetime.now()))
             dump(s, open("request.log", "w+", encoding="utf-8"), ensure_ascii=False, indent=4)
     except Exception as e:
-        print("wasted"]
+        print("wasted")
     try:
         bots[bot_id].send_message(cid, msg)
     except Exception as e:
