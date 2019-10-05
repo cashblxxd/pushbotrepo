@@ -483,6 +483,7 @@ def get_menu(lang, is_admin=False, is_local=False):
 
 
 def menu(update, context):
+    print("MENU!")
     context.user_data = commit(update, context, "message")
     lang = context.user_data[admin_id][str(update.message.from_user.id)]["lang"]
     update.message.reply_text(get_menu_text(update, context, str(update.message.from_user.id), admin_id, lang), reply_markup=get_menu(lang, str(update.message.chat_id) in admin_user_id))
@@ -883,9 +884,7 @@ def button(update, context):
             print(data)
             context.user_data[uid]["timezone"] = int(data[4:])
             context.user_data[uid]["state"] = "token"
-            update.callback_query.edit_message_text(get_token_desc(lang),
-                                                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🏡", callback_data="::home::")
-                                                            ]]))
+            update.callback_query.edit_message_text(get_token_desc(lang))
         elif data == "::home::":
             update.callback_query.edit_message_text(get_menu_text(update, context, uid, admin_id, lang), reply_markup=get_menu(lang, uid in admin_user_id))
         elif data.startswith("back::"):
@@ -1822,10 +1821,7 @@ def texter(update, context):
                                           reply_markup=InlineKeyboardMarkup([[
                                               InlineKeyboardButton("🏡", callback_data="::home::")
                                           ]]))
-                update.message.reply_text(get_token_desc(lang),
-                                          reply_markup=InlineKeyboardMarkup([[
-                                              InlineKeyboardButton("🏡", callback_data="::home::")
-                                          ]]))
+                update.message.reply_text(get_token_desc(lang))
     elif context.user_data[uid]["state"].startswith('send_message::'):
         context.user_data[bot_id][uid]["state"] = "pending"
         data = context.user_data[uid]["state"]
@@ -2302,5 +2298,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 

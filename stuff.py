@@ -3,8 +3,8 @@ from datetime import datetime
 
 def get_help(lang="ru"):
     if lang == "ru":
-        return "/start - начать диалог с ботом\n/menu - показать главное меню\nПо всем вопросам обращаться: Pushistbot@yandex.ru"
-    return "/start - start conversation with the bot\n/menu - get main menu\nAny questions: Pushistbot@yandex.ru"
+        return "/start - начать диалог с ботом\n/menu - показать главное меню\nhttps://clck.ru/JG6Dn - подробная инструкция к боту\nПо всем вопросам обращаться: Pushistbot@yandex.ru"
+    return "/start - start conversation with the bot\n/menu - get main menu\nhttps://clck.ru/JG6Dn - detailed bot instructions\nAny questions: Pushistbot@yandex.ru"
 
 
 def get_payment_ad(lang="ru"):
@@ -27,10 +27,10 @@ def get_translation(query, lang="ru"):
 
 def get_token_desc(lang="ru"):
     if lang == "ru":
-        return """
+        return """https://clck.ru/JG6Dn
         Теперь перейди в @botfather, создай бота и пришли мне API токен. После этого ты получишь бесплатную неделю премиум-доступа бесплатно!
         """
-    return "Send a /newbot to @botfather, follow the instructions and send me the token. After that you'll get a premium for a week, completely free!"
+    return "https://clck.ru/JG6Dn\nSend a /newbot to @botfather, follow the instructions and send me the token. After that you'll get a premium for a week, completely free!"
 
 
 def get_menu_text(update, context, uid, admin_id, lang):
@@ -250,4 +250,5 @@ tr = {
     "Ваша таблица: ": "Your spreadsheet: ",
     "Выберите чат": "Choose chat"
 }
+
 

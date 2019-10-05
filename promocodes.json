@@ -16,7 +16,7 @@
     },
     "pushcosmos": {
         "duration": "1months",
-        "activated": 1,
+        "activated": 2,
         "expiration_date": "2019-11-01"
     }
 }
