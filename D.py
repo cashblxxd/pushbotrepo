@@ -1,4 +1,5 @@
 import re
+import json
 import requests
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -363,8 +364,18 @@ admin_user_id = ["640028321", "106052"]
 
 
 def load_db():
-    with open('dumpp.json', 'r+', encoding='utf-8') as f:
-        return load(f)
+    try:
+        with open('dumpp.json', 'r+', encoding='utf-8') as f:
+            return load(f)
+    except json.JSONDecodeError as err:
+        # grab a reasonable section, say 40 characters.
+        start, stop = max(0, err.pos - 20), err.pos + 20
+        snippet = err.doc[start, stop]
+        if err.pos < 20:
+            snippet = '... ' + snippet
+        if err.pos + 20 < len(err.doc): snippet += ' ...'
+        print(err)
+        print(snippet)
 
 
 def dump_db(context):
